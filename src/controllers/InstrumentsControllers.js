@@ -12,6 +12,21 @@ const getInstruments = async (req, res) => {
     });
   }
 };
+const filterByFamily = async (req, res) => {
+  try {
+    const family = await Family.findOne({ name: req.params.family });
+    const instruments = await Instrument.find({ family: family._id }).populate(
+      'family',
+      'name -_id'
+    );
+    res.json(instruments);
+  } catch (error) {
+    res.status(501).json({
+      success: false,
+      error: error,
+    });
+  }
+};
 
 const createInstrument = async (req, res) => {
   const result = await Instrument.create(req.body);
@@ -61,4 +76,5 @@ module.exports = {
   createInstrument,
   updateInstrument,
   deleteInstrument,
+  filterByFamily,
 };
