@@ -30,32 +30,29 @@ server.listen(port, () => {
 
 // Endpoints
 const instrumentController = require('./controllers/InstrumentsControllers');
+const familyController = require('./controllers/FamilyControllers');
 
 // GET /api/instruments?family=DIM
 
 server.get('/api/instruments', (req, res) => {
   instrumentController.getInstruments(req, res);
-
-  //Instrument.find().then((result) => console.log(result));
-  //res.status(501).send('Not implemented');
 });
 
 // POST /api/instruments
 
 server.post('/api/instruments', async (req, res) => {
-  //res.status(501).send('Not implemented');
   instrumentController.createInstrument(req, res);
 });
 
 // PUT /api/instruments/xxxXXXxxx
 
-server.put('/api/instruments/:productId', async (req, res) => {
+server.put('/api/instruments/:instrumentId', async (req, res) => {
   instrumentController.updateInstrument(req, res);
 });
 
 // DELETE /api/instruments/xxxXXXxxx
 
-server.delete('/api/instruments/:productId', async (req, res) => {
+server.delete('/api/instruments/:instrumentId', async (req, res) => {
   instrumentController.deleteInstrument(req, res);
 });
 
@@ -73,8 +70,8 @@ server.post('/api/login', async (req, res) => {
 
 // GET /api/
 
-server.get('/api/productProveedor', async (req, res) => {
-  productController.getProductProvider(req, res);
+server.get('/api/family', async (req, res) => {
+  productController.getFamily(req, res);
 });
 
 module.exports = server;
