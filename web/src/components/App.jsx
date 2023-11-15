@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 // components
 import Header from './Header';
@@ -17,30 +17,31 @@ const App = () => {
   const [userName, setUserName] = useState('');
   const [userEmail, setUserEmail] = useState('');
   const [userPassword, setUserPassword] = useState('');
-  const [userMovies, setUserMovies] = useState([]);
   // state: login
   const [loginErrorMessage, setLoginErrorMessage] = useState('');
   // state: sign up
   const [signUpErrorMessage, setSignUpErrorMessage] = useState('');
   // state: movies
-  const [appMovies, setAppMovies] = useState([]);
-  const [allMoviesOptionGenre, setAllMoviesOptionGenre] = useState('');
-  const [allMoviesOptionSort, setAllMoviesOptionSort] = useState('asc');
+  const [appInstruments, setAppInstruments] = useState([]);
+  const [allInstrumentsOptionFamily, setAllInstrumentsOptionFamily] =
+    useState('');
+  const [allInstrumentsOptionSort, setAllInstrumentsOptionSort] =
+    useState('asc');
 
   /*
-  useEffect: obtener las películas del API.
-  Se ejecuta cuando allMoviesOptionGenre o allMoviesOptionSort cambian de valor.
-  Como queremos que el back devuelva las películas filtradas por género y ordenadas por nombre estamos pasando a getMoviesFromApi estos dos valores.
+  useEffect: obtener los instrumentos del API.
+  Se ejecuta cuando allInstrumentsOptionFamily o allInstrumentsOptionSort cambian de valor.
+  Como queremos que el back devuelva los instrumentos filtradas por familia y ordenadas por nombre estamos pasando a getInstrumentsFromApi estos dos valores.
   */
   useEffect(() => {
     const params = {
-      genre: allMoviesOptionGenre,
-      sort: allMoviesOptionSort,
+      family: allInstrumentsOptionFamily,
+      sort: allInstrumentsOptionSort,
     };
-    apiMovies.getMoviesFromApi(params).then((response) => {
-      setAppMovies(response.movies);
+    apiInstruments.getInstrumentsFromApi(params).then((response) => {
+      setAppInstruments(response.movies);
     });
-  }, [allMoviesOptionGenre, allMoviesOptionSort]);
+  }, [allInstrumentsOptionFamily, allInstrumentsOptionSort]);
 
   /*
   useEffect: obtener el perfil de la usuaria.
@@ -53,19 +54,6 @@ const App = () => {
         setUserName(response.name);
         setUserEmail(response.email);
         setUserPassword(response.password);
-      });
-    }
-  }, [userId]);
-
-  /*
-  useEffect: obtener las películas de la usuaria.
-  Se ejecuta cuando userId cambian de valor, es decir, cuando pasa de un string vacío a un strin relleno con el id de la usuaria.
-  Como queremos que el back devuelva las películas de una usuaria getUserMoviesFromApi recibe el userId.
-  */
-  useEffect(() => {
-    if (userId !== '') {
-      apiUser.getUserMoviesFromApi(userId).then((response) => {
-        setUserMovies(response.movies);
       });
     }
   }, [userId]);
@@ -129,37 +117,26 @@ const App = () => {
     });
   };
 
-  /*
-  Event: cerrar sesión.
-  Redireccionamos al inicio de la página.
-  Recargamos la página para que se borren todos los datos del estado de React.
-  */
+  //Event: cerrar sesión.
   const logout = () => {
     router.redirect('/');
     router.reload();
     localStorage.clear();
   };
 
-  /*
-  Event: actualizar el género y la ordenación.
-  Aquí solo guardamos los datos en el estado.
-  En el primer useEffect le decimos que cuando estos datos cambien vuelva a pedir las películas al API.
-  */
-  const handleAllMoviesOptions = (data) => {
-    if (data.key === 'genre') {
-      setAllMoviesOptionGenre(data.value);
+  //Event: actualizar el familia y el orden
+  const handleAllInstrumentsOptions = (data) => {
+    if (data.key === 'family') {
+      setAllInstrumentsOptionFamily(data.value);
     } else if (data.key === 'sort') {
-      setAllMoviesOptionSort(data.value);
+      setAllInstrumentsOptionSort(data.value);
     }
   };
 
   // render
-
   return (
     <>
-      {/* Le paso Header un booleano indicando si la usuaria está o no logada.
-      No es necesario pasarle el userId, no necesita saberlo, le basta con saber si está logada o no.
-      De esta forma Header maneja datos más simples y solo los que necesita. Queremos que Header sea lo más simple posible. */}
+      {/* Le paso Header un booleano indicando si la usuaria está o no logada. */}
       <Header isUserLogged={!!userId} logout={logout} />
 
       <Routes>
@@ -167,16 +144,14 @@ const App = () => {
           exact
           path='/'
           element={
-            <AllMovies
-              movies={appMovies}
-              allMoviesOptionGenre={allMoviesOptionGenre}
-              allMoviesOptionSort={allMoviesOptionSort}
-              handleAllMoviesOptions={handleAllMoviesOptions}
+            <AllInstruments
+              instruments={appInstruments}
+              allInstrumentsOptionFamily={allInstrumentsOptionFamily}
+              allInstrumentsOptionSort={allInstrumentsOptionSort}
+              handleAllInstrumentsOptions={handleAllInstrumentsOptions}
             />
           }
         />
-
-        <Route path='/my-movies' element={<MyMovies movies={userMovies} />} />
 
         <Route
           path='/login'

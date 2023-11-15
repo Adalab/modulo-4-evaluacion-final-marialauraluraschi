@@ -1,6 +1,5 @@
-import React from 'react';
 import InstrumentList from './InstrumentList';
-import '../styles/AppInstruments.scss';
+import '../styles/App.scss';
 
 const AllInstruments = (props) => {
   const handleOptions = (ev) => {
@@ -15,7 +14,7 @@ const AllInstruments = (props) => {
       <h1 className='title--medium'>Instrumentos</h1>
       <form className='movies__filters'>
         <div className='movies__filters--genre'>
-          <label htmlFor='filterGenre'>Filtrar por familia</label>
+          <label htmlFor='filterFamily'>Filtrar por familia</label>
           <select
             className='form__input-text'
             id='filterFamily'
@@ -59,7 +58,7 @@ const AllInstruments = (props) => {
         </div>
       </form>
 
-      <InstrumentsList instruments={props.instruments} />
+      <InstrumentList instruments={props.instruments} />
     </section>
   );
 };

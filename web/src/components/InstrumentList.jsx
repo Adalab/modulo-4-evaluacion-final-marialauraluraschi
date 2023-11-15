@@ -12,7 +12,7 @@ const instrumentList = (props) => {
           <img
             className='card__img'
             src={instrument.pic}
-            alt={`Imágen de ${instrument.title}`}
+            alt={`Imágen de ${instrument.name}`}
           />
           <h3 className='card__title'>{instrument.name}</h3>
           <p className='card__description'>
@@ -28,7 +28,7 @@ const instrumentList = (props) => {
     return <p>No hay instrumentos en este listado</p>;
   };
 
-  return props.instruments.length ? renderInstrumentList() : renderEmptyList();
+  return props.instruments ? renderInstrumentList() : renderEmptyList();
 };
 
 export default instrumentList;
