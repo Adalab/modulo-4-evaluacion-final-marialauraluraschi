@@ -6,11 +6,13 @@
   "scripts": {
     "test": "NODE_ENV=test jest --verbose --watchAll --runInBand",
     "start": "node src/index.js",
-    "dev": "nodemon src/index.js"
+    "dev": "nodemon src/index.js",
+    "publish-react": "cd web && npm run build && cd .. && rm -rf ./src/public-react && mv ./web/dist ./src/public-react"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "ejs": "^3.1.9",
     "bcrypt": "^5.1.0",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",

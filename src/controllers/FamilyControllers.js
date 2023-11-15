@@ -9,6 +9,25 @@ const getFamily = async (req, res) => {
   }
 };
 
+const detailFamily = async (req, res) => {
+  const name = req.query.name;
+
+  try {
+    const family = await Family.findOne({ familyName: name });
+    if (!family) {
+      return res.render('notFound');
+    } else {
+      return res.render('detailFamily', { family });
+    }
+  } catch (error) {
+    return res.status(501).json({
+      success: false,
+      error: error,
+    });
+  }
+};
+
 module.exports = {
   getFamily,
+  detailFamily,
 };

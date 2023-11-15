@@ -3,8 +3,8 @@ const Schema = mongoose.Schema;
 
 const familySchema = new Schema(
   {
-    family: { type: String },
-    description: { type: String },
+    familyName: { type: String },
+    familyDesc: { type: String },
   },
 
   {

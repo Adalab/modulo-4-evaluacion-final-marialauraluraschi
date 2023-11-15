@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/main.css" />
+  <script src="https://kit.fontawesome.com/66349fc88a.js" crossorigin="anonymous"></script>
+  <title>Instrument Detail</title>
+</head>
+
+<body class="body">
+  <a href="/"><i class="fa-duotone fa-angles-left fa-fade"></i></a>
+  <h2 class="title">
+    <%= instrument.name %>
+  </h2>
+  <p class="family">
+    <%= instrument.family.familyName %>
+  </p>
+  <p class="desc">
+    <%= instrument.description %>
+  </p>
+  <img class="pic" src=<%=instrument.pic %> alt="instrument picture">
+  <a href=<%=instrument.audio %> > Audio</a>
+</body>
+
+</html>

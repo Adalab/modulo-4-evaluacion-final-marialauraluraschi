@@ -1,9 +1,10 @@
 const Instrument = require('../models/instrument.model');
 const Family = require('../models/family.model');
+const mongoose = require('mongoose');
 
 const getInstruments = async (req, res) => {
   try {
-    const result = await Instrument.find();
+    const result = await Instrument.find().populate('family');
     res.json(result);
   } catch (error) {
     res.status(501).json({
@@ -12,12 +13,34 @@ const getInstruments = async (req, res) => {
     });
   }
 };
+
+const detailInstrument = async (req, res) => {
+  const id = req.params.id;
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.render('notFound');
+  }
+
+  try {
+    const instrument = await Instrument.findById(id).populate('family');
+    if (!instrument) {
+      return res.render('notFound');
+    } else {
+      return res.render('detailInstrument', { instrument });
+    }
+  } catch (error) {
+    return res.status(501).json({
+      success: false,
+      error: error,
+    });
+  }
+};
+
 const filterByFamily = async (req, res) => {
   try {
-    const family = await Family.findOne({ name: req.params.family });
+    const family = await Family.findOne({ familyName: req.query.family });
     const instruments = await Instrument.find({ family: family._id }).populate(
-      'family',
-      'name -_id'
+      'family'
     );
     res.json(instruments);
   } catch (error) {
@@ -73,6 +96,7 @@ const deleteInstrument = async (req, res) => {
 
 module.exports = {
   getInstruments,
+  detailInstrument,
   createInstrument,
   updateInstrument,
   deleteInstrument,
