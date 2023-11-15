@@ -1,0 +1,34 @@
+import React from 'react';
+
+const instrumentList = (props) => {
+  const renderInstrumentList = () => {
+    return <ul className='cards'>{renderInstruments()}</ul>;
+  };
+
+  const renderInstruments = () => {
+    return props.instruments.map((instrument) => {
+      return (
+        <li key={instrument._id} className='card'>
+          <img
+            className='card__img'
+            src={instrument.pic}
+            alt={`Imágen de ${instrument.title}`}
+          />
+          <h3 className='card__title'>{instrument.name}</h3>
+          <p className='card__description'>
+            Familia: {instrument.family.familyName}
+          </p>
+          <p className='card__description'>{instrument.description}</p>
+        </li>
+      );
+    });
+  };
+
+  const renderEmptyList = () => {
+    return <p>No hay instrumentos en este listado</p>;
+  };
+
+  return props.instruments.length ? renderInstrumentList() : renderEmptyList();
+};
+
+export default instrumentList;
