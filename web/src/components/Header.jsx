@@ -40,7 +40,7 @@ const Header = (props) => {
   return (
     <header className='col2 border--medium'>
       <Link className='nav__link' to='/'>
-        <h1 className='title--big'>Instrumentos</h1>
+        <h1 className='title--big'>API de Instrumentos</h1>
       </Link>
       <nav className='text-align-right'>
         <ul>

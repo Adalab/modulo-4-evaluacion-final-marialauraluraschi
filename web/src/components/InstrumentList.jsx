@@ -1,5 +1,3 @@
-import React from 'react';
-
 const instrumentList = (props) => {
   const renderInstrumentList = () => {
     return <ul className='cards'>{renderInstruments()}</ul>;

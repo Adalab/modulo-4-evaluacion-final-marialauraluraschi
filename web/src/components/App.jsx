@@ -21,7 +21,7 @@ const App = () => {
   const [loginErrorMessage, setLoginErrorMessage] = useState('');
   // state: sign up
   const [signUpErrorMessage, setSignUpErrorMessage] = useState('');
-  // state: movies
+  // state: instruments
   const [appInstruments, setAppInstruments] = useState([]);
   const [allInstrumentsOptionFamily, setAllInstrumentsOptionFamily] =
     useState('');
@@ -39,9 +39,9 @@ const App = () => {
       sort: allInstrumentsOptionSort,
     };
     apiInstruments.getInstrumentsFromApi(params).then((response) => {
-      setAppInstruments(response.movies);
+      setAppInstruments(response);
     });
-  }, [allInstrumentsOptionFamily, allInstrumentsOptionSort]);
+  }, []);
 
   /*
   useEffect: obtener el perfil de la usuaria.
