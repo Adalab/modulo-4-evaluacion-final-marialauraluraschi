@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
+import '../styles/App.scss';
 // components
 import Header from './Header';
 import AllInstruments from './AllInstruments';
@@ -34,14 +35,14 @@ const App = () => {
   Como queremos que el back devuelva los instrumentos filtradas por familia y ordenadas por nombre estamos pasando a getInstrumentsFromApi estos dos valores.
   */
   useEffect(() => {
-    const params = {
-      family: allInstrumentsOptionFamily,
-      sort: allInstrumentsOptionSort,
-    };
-    apiInstruments.getInstrumentsFromApi(params).then((response) => {
-      setAppInstruments(response);
-    });
-  }, []);
+    // Aquí llamas a la función getInstrumentsByFamilyFromApi pasándole el valor de allInstrumentsOptionFamily como argumento
+    apiInstruments
+      .getInstrumentsByFamilyFromApi(allInstrumentsOptionFamily)
+      .then((data) => {
+        // Luego actualizas el estado con la respuesta de la API
+        setAppInstruments(data);
+      });
+  }, [allInstrumentsOptionFamily, allInstrumentsOptionSort]);
 
   /*
   useEffect: obtener el perfil de la usuaria.

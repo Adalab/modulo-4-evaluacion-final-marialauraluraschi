@@ -1,3 +1,4 @@
+import '../styles/App.scss';
 const instrumentList = (props) => {
   const renderInstrumentList = () => {
     return <ul className='cards'>{renderInstruments()}</ul>;
@@ -13,6 +14,7 @@ const instrumentList = (props) => {
             alt={`Imágen de ${instrument.name}`}
           />
           <h3 className='card__title'>{instrument.name}</h3>
+          <a href={`${instrument.audio}`}>Audio</a>
           <p className='card__description'>
             Familia: {instrument.family.familyName}
           </p>

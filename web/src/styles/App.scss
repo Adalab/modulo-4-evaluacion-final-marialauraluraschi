@@ -11,3 +11,11 @@
   display: inline-block;
   margin: 0 0.5rem;
 }
+.instruments {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  .instrument {
+    width: 70%;
+  }
+}

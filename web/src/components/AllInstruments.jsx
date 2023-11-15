@@ -8,7 +8,6 @@ const AllInstruments = (props) => {
       key: ev.target.name,
     });
   };
-
   return (
     <section className='border--medium'>
       <h1 className='title--medium'>Instrumentos</h1>
