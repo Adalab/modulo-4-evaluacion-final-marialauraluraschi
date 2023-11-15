@@ -1,12 +1,3 @@
-const getInstrumentsFromApi = () => {
-  console.log('Se están pidiendo los instrumentos de la app');
-  return fetch('//localhost:4500/api/instruments')
-    .then((response) => response.json())
-    .then((data) => {
-      return data;
-    });
-};
-
 const getInstrumentDetailFromApi = (id) => {
   console.log(`Se está pidiendo el detalle del instrumento con id ${id}`);
   return fetch(`//localhost:4500/api/instruments/${id}`)
@@ -15,10 +6,11 @@ const getInstrumentDetailFromApi = (id) => {
       return data;
     });
 };
-
-const getInstrumentsByFamilyFromApi = (familyName) => {
+const getInstrumentsByFamilyFromApi = (familyName, sortOption) => {
   console.log(`Se están pidiendo los instrumentos de la familia ${familyName}`);
-  return fetch(`//localhost:4500/api/instruments?family=${familyName}`)
+  return fetch(
+    `//localhost:4500/api/instruments?family=${familyName}&sort=${sortOption}`
+  )
     .then((response) => response.json())
     .then((data) => {
       return data;
@@ -26,7 +18,6 @@ const getInstrumentsByFamilyFromApi = (familyName) => {
 };
 
 const objToExport = {
-  getInstrumentsFromApi: getInstrumentsFromApi,
   getInstrumentDetailFromApi: getInstrumentDetailFromApi,
   getInstrumentsByFamilyFromApi: getInstrumentsByFamilyFromApi,
 };

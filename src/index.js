@@ -19,7 +19,11 @@ const port = process.env.PORT || 4500;
 server.listen(port, () => {
   console.log(`Ya se ha arrancado nuestro servidor: http://localhost:${port}/`);
 });
+const staticServerPath = './web/dist/';
+server.use(express.static(staticServerPath));
 
+const pathServerPublicStyles = './src/public-css';
+server.use(express.static(pathServerPublicStyles));
 // Endpoints
 const instrumentController = require('./controllers/InstrumentsControllers');
 const familyController = require('./controllers/FamilyControllers');

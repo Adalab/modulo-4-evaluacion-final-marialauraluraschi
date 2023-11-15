@@ -34,12 +34,14 @@ const App = () => {
   Se ejecuta cuando allInstrumentsOptionFamily o allInstrumentsOptionSort cambian de valor.
   Como queremos que el back devuelva los instrumentos filtradas por familia y ordenadas por nombre estamos pasando a getInstrumentsFromApi estos dos valores.
   */
+
   useEffect(() => {
-    // Aquí llamas a la función getInstrumentsByFamilyFromApi pasándole el valor de allInstrumentsOptionFamily como argumento
     apiInstruments
-      .getInstrumentsByFamilyFromApi(allInstrumentsOptionFamily)
+      .getInstrumentsByFamilyFromApi(
+        allInstrumentsOptionFamily,
+        allInstrumentsOptionSort
+      )
       .then((data) => {
-        // Luego actualizas el estado con la respuesta de la API
         setAppInstruments(data);
       });
   }, [allInstrumentsOptionFamily, allInstrumentsOptionSort]);

@@ -29,7 +29,6 @@ const AllInstruments = (props) => {
             <option value='Idiófonos'>Idiófonos</option>
           </select>
         </div>
-
         <div className='movies__filters--sort'>
           <label>
             Ordernar: A-Z
