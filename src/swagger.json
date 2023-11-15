@@ -1,29 +1,25 @@
 {
   "swagger": "2.0",
   "info": {
-    "description": "API para manejar recetas",
+    "description": "API para manejar instrumentos",
     "version": "1.0.0",
-    "title": "API de Recetas"
+    "title": "API de Instrumentos"
   },
   "host": "localhost:4500",
   "basePath": "/",
   "tags": [
     {
-      "name": "recetas",
-      "description": "Operaciones con Recetas"
-    },
-    {
-      "name": "usuarios",
-      "description": "Operaciones de Usuarios"
+      "name": "instrumentos",
+      "description": "Operaciones con Instrumentos"
     }
   ],
   "schemes": ["http"],
   "paths": {
-    "/recetas": {
+    "/api/instruments": {
       "get": {
-        "tags": ["recetas"],
-        "summary": "Obtener todas las recetas",
-        "description": "Retorna todas las recetas disponibles",
+        "tags": ["instrumentos"],
+        "summary": "Obtener todos los instrumentos",
+        "description": "Retorna todos los instrumentos disponibles",
         "produces": ["application/json"],
         "responses": {
           "200": {
@@ -31,68 +27,67 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/Receta"
+                "$ref": "#/definitions/Instrumento"
               }
             }
           }
         }
       },
       "post": {
-        "tags": ["recetas"],
-        "summary": "Crear una nueva receta",
-        "description": "Crea una nueva receta",
+        "tags": ["instrumentos"],
+        "summary": "Crear un nuevo instrumento",
+        "description": "Crea un nuevo instrumento",
         "consumes": ["application/json"],
         "produces": ["application/json"],
         "parameters": [
           {
             "in": "body",
             "name": "body",
-            "description": "Objeto Receta que necesita ser añadido",
+            "description": "Objeto Instrumento que necesita ser añadido",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Receta"
+              "$ref": "#/definitions/Instrumento"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Receta creada"
+            "description": "Instrumento creado"
           }
         }
       }
     },
-    "/recetas/{id}": {
+    "/api/instruments/{id}": {
       "get": {
-        "tags": ["recetas"],
-        "summary": "Encuentra una receta por ID",
-        "description": "Retorna una receta única",
+        "tags": ["instrumentos"],
+        "summary": "Encuentra un instrumento por ID",
+        "description": "Retorna un instrumento único",
         "produces": ["application/json"],
         "parameters": [
           {
             "name": "id",
             "in": "path",
-            "description": "ID de la receta a retornar",
+            "description": "ID del instrumento a retornar",
             "required": true,
-            "type": "integer",
-            "format": "int64"
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
             "description": "Operación exitosa",
             "schema": {
-              "$ref": "#/definitions/Receta"
+              "$ref": "#/definitions/Instrumento"
             }
           },
           "404": {
-            "description": "Receta no encontrada"
+            "description": "Instrumento no encontrado"
           }
         }
       },
       "put": {
-        "tags": ["recetas"],
-        "summary": "Actualizar una receta existente",
-        "description": "Actualiza una receta",
+        "tags": ["instrumentos"],
+        "summary": "Actualizar un instrumento existente",
+        "description": "Actualiza un instrumento",
         "consumes": ["application/json"],
         "produces": ["application/json"],
         "parameters": [
@@ -100,145 +95,57 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "integer",
-            "format": "int64"
+            "type": "string"
           },
           {
             "in": "body",
             "name": "body",
-            "description": "Receta que necesita ser actualizada",
+            "description": "Instrumento que necesita ser actualizado",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Receta"
+              "$ref": "#/definitions/Instrumento"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Receta actualizada"
+            "description": "Instrumento actualizado"
           }
         }
       },
       "delete": {
-        "tags": ["recetas"],
-        "summary": "Eliminar una receta",
-        "description": "Elimina una receta por ID",
+        "tags": ["instrumentos"],
+        "summary": "Eliminar un instrumento",
+        "description": "Elimina un instrumento por ID",
         "produces": ["application/json"],
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "integer",
-            "format": "int64"
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
-            "description": "Receta eliminada"
-          }
-        }
-      }
-    },
-    "/api/register": {
-      "post": {
-        "tags": ["usuarios"],
-        "summary": "Registrar un nuevo usuario",
-        "description": "Crea un nuevo usuario en el sistema",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "description": "Datos del usuario a registrar",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/User"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Usuario registrado exitosamente"
-          }
-        }
-      }
-    },
-    "/api/login": {
-      "post": {
-        "tags": ["usuarios"],
-        "summary": "Iniciar sesión",
-        "description": "Iniciar sesión en el sistema",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "description": "Datos de inicio de sesión del usuario",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Login"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Inicio de sesión exitoso"
-          },
-          "401": {
-            "description": "Credenciales inválidas"
+            "description": "Instrumento eliminado"
           }
         }
       }
     }
   },
   "definitions": {
-    "Receta": {
+    "Instrumento": {
       "type": "object",
-      "required": ["nombre", "ingredientes", "instrucciones"],
       "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
+        "name": {
+          "type": "string",
+          "description": "Nombre del instrumento"
         },
-        "nombre": {
-          "type": "string"
-        },
-        "ingredientes": {
-          "type": "string"
-        },
-        "instrucciones": {
-          "type": "string"
+        "family": {
+          "type": "string",
+          "description": "Familia del instrumento"
         }
-      }
-    }
-  },
-  "User": {
-    "type": "object",
-    "required": ["username", "email", "password"],
-    "properties": {
-      "username": {
-        "type": "string"
-      },
-      "email": {
-        "type": "string"
-      },
-      "password": {
-        "type": "string"
-      }
-    }
-  },
-  "Login": {
-    "type": "object",
-    "required": ["username", "password"],
-    "properties": {
-      "username": {
-        "type": "string"
-      },
-      "password": {
-        "type": "string"
       }
     }
   }
